@@ -3,6 +3,7 @@ import jwt from 'jsonwebtoken';
 export const generateToken=(userId,res)=>{
     const {JWT_SECRET,NODE_ENV}=process.env;
         if(!JWT_SECRET)throw new Error("JWT_SECRET is not set");
+        if(!NODE_ENV)throw new Error("NODE_ENV is not set");
     const token=jwt.sign({userId},JWT_SECRET,{
         expiresIn:"7d"
     });
