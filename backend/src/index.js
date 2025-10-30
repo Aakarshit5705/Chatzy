@@ -3,14 +3,18 @@ import dotenv from 'dotenv';
 import path from 'path';
 
 import authRouter from './routes/auth.routes.js';
+import connectToDB from './lib/db.cofig.js';
+
+const app=express();
 
 dotenv.config();
+app.use(express.json()); //req.body
 
 const PORT=process.env.PORT||3000;
 
 const __dirname=path.resolve();
 
-const app=express();
+
 
 app.use('/auth',authRouter);
 
@@ -24,4 +28,5 @@ app.get(/.*/,(req,res)=>{
 
 app.listen(PORT,()=>{
     console.log('Server is listening at 3000 ');
+    connectToDB();
 })
