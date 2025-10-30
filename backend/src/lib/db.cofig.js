@@ -3,7 +3,9 @@ import mongoose from 'mongoose';
 
 export default async function connectToDB(){
     try{
-        await mongoose.connect(process.env.MONGO_URL);
+        const {MONGO_URL}=process.env;
+        if(!MONGO_URL)throw new Error("MONGO_URL is not set");
+        await mongoose.connect(MONGO_URL);
         console.log('MongoDB is connected successfully!!!')
     }catch(err){
         console.error('Mongodb Error:', err);
