@@ -1,6 +1,7 @@
 import express from 'express';
 import dotenv from 'dotenv';
 import path from 'path';
+import cookieParser from "cookie-parser";
 
 import authRouter from './routes/auth.routes.js';
 import connectToDB from './lib/db.cofig.js';
@@ -9,6 +10,7 @@ const app=express();
 
 dotenv.config();
 app.use(express.json()); //req.body
+app.use(cookieParser());
 
 const PORT=process.env.PORT||3000;
 
