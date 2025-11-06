@@ -1,10 +1,11 @@
 
 import bcrypt from 'bcrypt';
-import "dotenv/config"
+import "dotenv/config";
 
 import UserModel from "../models/user.model.js";
 import { generateToken } from '../lib/utils.js';
 import { sendWelcomeEmail } from '../emails/emailHandler.js';
+import cloudinary from '../lib/cloudinary.js';
 
 
 
@@ -82,4 +83,20 @@ export const login=async (req,res) => {
 export const logout=(req,res)=>{
     res.cookie("jwt","",{maxAge:0});
     res.status(200).json({message:"Logged Out Successfully!!"});
+}
+
+export const updateProfile=async(req,res)=>{
+    try {
+        const {profilePic}=req.body;
+        if(!profilePic) return res.status(404).json({message:"Profile Picture is required"});
+
+        const userId=req.user._id;
+
+        const uplaoded=await cloudinary.uploader.upload(profilePic);
+        const updatedUser=await UserModel.findByIdAndUpdate(userId,{profilePic:uplaoded.secure_url},{new:true});
+        return res.status(200).json(updatedUser);
+    } catch (error) {
+        console.log("Error in updateProfile ",error);
+        return res.status(500).json({message:"Internal Server Error"});
+    }
 }
