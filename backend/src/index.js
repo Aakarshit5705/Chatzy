@@ -4,6 +4,8 @@ import path from 'path';
 import cookieParser from "cookie-parser";
 
 import authRouter from './routes/auth.routes.js';
+import messageRouter from './routes/message.routes.js';
+
 import connectToDB from './lib/db.cofig.js';
 
 const app=express();
@@ -19,6 +21,7 @@ const __dirname=path.resolve();
 
 
 app.use('/auth',authRouter);
+app.use('/message',messageRouter);
 
 if(process.env.NODE_ENV=== "production"){
     app.use(express.static(path.join(__dirname,"../frontend/dist")));
