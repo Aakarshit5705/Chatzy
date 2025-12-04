@@ -8,7 +8,7 @@ import UserModel from '../models/user.model.js';
 export const getAllContacts=async(req,res)=>{
     try {
         const loggedInId=req.user._id;
-        const filteredUsers= await MessageModel.find({id:{$ne:loggedInId}}).select("-password")
+        const filteredUsers= await MessageModel.find({_id:{$ne:loggedInId}}).select("-password")
 
         res.status(200).json(filteredUsers)
 
@@ -58,9 +58,9 @@ export const sendMessage=async(req,res)=>{
             const uploadResponse = await cloudinary.uploader.upload(image);
             imageUrl = uploadResponse.secure_url;
         }
-        const newMessage = new Message({
+        const newMessage = new MessageModel({
             senderId,
-            receiverId,
+            receiverId:id,
             text,
             image: imageUrl,
         });
