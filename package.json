@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "engines": {
-    "node":">=20.0.0"
+    "node": ">=20.0.0"
   },
   "scripts": {
     "build": "npm install --prefix backend && npm install --prefix frontend && npm run build --prefix frontend",
@@ -21,5 +21,8 @@
   "bugs": {
     "url": "https://github.com/Aakarshit5705/Chatzy/issues"
   },
-  "homepage": "https://github.com/Aakarshit5705/Chatzy#readme"
+  "homepage": "https://github.com/Aakarshit5705/Chatzy#readme",
+  "dependencies": {
+    "react-router": "^7.10.0"
+  }
 }
