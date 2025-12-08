@@ -8,7 +8,7 @@ import UserModel from '../models/user.model.js';
 export const getAllContacts=async(req,res)=>{
     try {
         const loggedInId=req.user._id;
-        const filteredUsers= await MessageModel.find({_id:{$ne:loggedInId}}).select("-password")
+        const filteredUsers= await UserModel.find({_id:{$ne:loggedInId}}).select("-password")
 
         res.status(200).json(filteredUsers)
 
