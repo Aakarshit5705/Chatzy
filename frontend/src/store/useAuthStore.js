@@ -7,6 +7,7 @@ export const useAuth=create((set,get)=>({
     isChecking:true,
     isSigningUp:false,
     isLoggingIn:false,
+    isUpdatingPhoto:false,
     checkAuth:async () =>{
         try {
             const res=await axiosInstance.get("/auth/check")
@@ -26,7 +27,7 @@ export const useAuth=create((set,get)=>({
             toast.success("Account Created Successfully!!!")
         } catch (error) {
             toast.error(error.response.data.message)
-            console.log("Error in checkAuth: ",error);
+            console.log("Error in signup: ",error);
             set({authUser:null})
         }finally{
             set({isSigningUp:false})
@@ -40,7 +41,7 @@ export const useAuth=create((set,get)=>({
             toast.success("LoggedIn Successfully!!!")
         } catch (error) {
             toast.error(error.response.data.message)
-            console.log("Error in checkAuth: ",error);
+            console.log("Error in login: ",error);
             set({authUser:null})
         }finally{
             set({isLoggingIn:false})
@@ -53,7 +54,22 @@ export const useAuth=create((set,get)=>({
             toast.success("Logged Out Successfully!!!")
         } catch (error) {
             toast.error(error.response.data.message)
-            console.log("Error in checkAuth: ",error);
+            console.log("Error in logout: ",error);
+        }
+    },
+    updateProfile:async(data)=>{
+        set({isUpdatingPhoto:true})
+        try {
+            const res=await axiosInstance.put('/auth/update-profile',data);
+            set({authUser:res.data});
+            toast.success("Profile Uploaded Successfully!!!");
+        } catch (error) {
+            toast.error(error.response.data.message)
+            console.log("Error in updateProfile: ",error);
+            
+        }
+        finally{
+            set({isUpdatingPhoto:false})
         }
     }
 }))
