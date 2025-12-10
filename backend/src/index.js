@@ -7,37 +7,42 @@ import cors from "cors";
 import authRouter from './routes/auth.routes.js';
 import messageRouter from './routes/message.routes.js';
 
-
 import connectToDB from './lib/db.cofig.js';
+import { app,server } from './lib/socket.js';
 
-const app=express();
+dotenv.config(); // ✅ Load env FIRST
 
-dotenv.config();
-app.use(express.json()); //req.body
+
+const PORT = process.env.PORT || 3000;
+
+const __dirname = path.resolve();
+
+// Middlewares
+app.use(express.json({ limit: "15mb" }));
 app.use(cookieParser());
+
 app.use(cors({
-    origin:process.env.CLIENT_URL,
-    credentials:true
-}))
+  origin: process.env.CLIENT_URL,
+  credentials: true
+}));
 
-const PORT=process.env.PORT||3000;
+// Routes
+app.use('/api/auth', authRouter);
+app.use('/api/message', messageRouter);
 
-const __dirname=path.resolve();
+// Serve frontend in production only
+if (process.env.NODE_ENV === "production") {
+  app.use(express.static(path.join(__dirname, "../frontend/dist")));
 
-
-
-app.use('/api/auth',authRouter);
-app.use('/api/message',messageRouter);
-
-if(process.env.NODE_ENV=== "production"){
-    app.use(express.static(path.join(__dirname,"../frontend/dist")));
+  app.get("*", (req, res) => {
+    res.sendFile(
+      path.join(__dirname, "../frontend/dist/index.html")
+    );
+  });
 }
 
-app.get(/.*/,(req,res)=>{
-    res.sendFile(path.join(__dirname,"../frontend/dist/index.html"))
+// Start server
+server.listen(PORT, () => {
+  console.log(`✅ Server running on port ${PORT}`);
+  connectToDB();
 });
-
-app.listen(PORT,()=>{
-    console.log('Server is listening at 3000 ');
-    connectToDB();
-})
