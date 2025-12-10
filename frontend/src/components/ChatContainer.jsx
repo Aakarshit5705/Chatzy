@@ -12,9 +12,12 @@ function ChatContainer() {
     getMessagesByUserId,
     selectedUser,
     isMessageLoading,
+    subscribeToMessages,
+    unsubscribeFromMessages
   } = useChat();
   const { authUser } = useAuth();
   const messageEndRef=useRef();
+
   useEffect(() => {
     if (messageEndRef.current) {
       messageEndRef.current.scrollIntoView({ behavior: "smooth" });
@@ -38,7 +41,12 @@ function ChatContainer() {
   useEffect(() => {
     if (!selectedUser?._id) return;
     getMessagesByUserId(selectedUser._id);
-  }, [getMessagesByUserId, selectedUser?._id]);
+    subscribeToMessages();
+
+    return ()=> unsubscribeFromMessages();
+  }, [getMessagesByUserId, selectedUser?._id,subscribeToMessages,unsubscribeFromMessages]);
+
+  
 
   return (
     <div className="flex flex-col h-full">
