@@ -22,7 +22,7 @@ export const getAllContacts=async(req,res)=>{
 export const getUserById=async(req,res)=>{
     try {
         const myId=req.user._id;
-        const id=req.params;
+        const {id}=req.params;
 
         const messages =await MessageModel.find({
             $or:[
@@ -40,7 +40,7 @@ export const getUserById=async(req,res)=>{
 export const sendMessage=async(req,res)=>{
     try {
         const{text,image}=req.body;
-        const {id}=req.params;
+        const { id: receiverId } = req.params;
         const senderId=req.user._id;
         if (!text && !image) {
             return res.status(400).json({ message: "Text or image is required." });
@@ -60,7 +60,7 @@ export const sendMessage=async(req,res)=>{
         }
         const newMessage = new MessageModel({
             senderId,
-            receiverId:id,
+            receiverId,
             text,
             image: imageUrl,
         });
