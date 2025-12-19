@@ -1,74 +1,86 @@
-Chatzy 💬
+# 💬 Chatzy — Real-Time Chat Web Application
 
-Chatzy is a modern, full-stack real-time chat application built with a clean React + Node.js architecture, featuring real-time messaging via Socket.IO, authentication, email handling, sound effects, and state management using Zustand.
+Chatzy is a modern **full-stack real-time chat application** built to deliver fast, secure, and seamless communication. It supports real-time messaging using **Socket.IO**, secure authentication, sound-based interactions, and scalable global state management with **Zustand**.
 
-🚀 Features
+---
 
-🔐 JWT-based Authentication (Signup / Login)
+## 🌐 Live Links
 
-💬 Real-time messaging using Socket.IO
+* **Live Website:** [https://chatzy-frontend.onsevalla.com](https://chatzy-25sae.sevalla.app/)
 
-👥 User & contact management
 
-📨 Message persistence with MongoDB
+> ℹ️ Users access the application via the frontend link.
+> ℹ️ This GitHub repository contains only the source code.
 
-🔔 Sound effects for typing, clicks & notifications
+---
 
-📧 Email support (templates + handlers)
+## 🚀 Features
 
-🖼️ Cloudinary integration for media handling
+### 🔐 Authentication & Security
 
-🛡️ Middleware-based route & socket protection
+* User signup and login
+* JWT-based authentication
+* Protected API routes and sockets
+* Secure middleware handling
 
-⚡ Fast Vite-based frontend
+### 💬 Real-Time Chat
 
-🌍 Production deployment using Sevalla
+* One-to-one real-time messaging
+* Socket.IO based communication
+* Online user presence
+* Persistent chat history
 
-🧠 Tech Stack
-Frontend
+### 🔔 User Experience
 
-React (Vite)
+* Typing and notification sounds
+* Loading skeletons for smooth UI
+* Clean and responsive interface
+* Optimized performance with Vite
 
-Zustand (global state management)
+### 📧 Email & Media
 
-Axios
+* Email handling with templates
+* Cloudinary integration for media
+* Structured email services
 
-Tailwind CSS
+---
 
-Custom hooks
+## 🧠 Tech Stack
 
-Socket.IO Client
+### 🎨 Frontend
 
-Backend
+* React (Vite)
+* Zustand (State Management)
+* Axios
+* Tailwind CSS
+* Socket.IO Client
 
-Node.js
+### 🛠 Backend
 
-Express.js
+* Node.js
+* Express.js
+* MongoDB + Mongoose
+* Socket.IO
+* JWT Authentication
+* Cloudinary
+* Resend (Email Service)
+* Arcjet (Security & Protection)
 
-MongoDB + Mongoose
+---
 
-Socket.IO
+## 📁 Project Structure
 
-JWT Authentication
+### 🔧 Backend
 
-Cloudinary
-
-Resend (email service)
-
-Arcjet (security / protection)
-
-📁 Project Structure
-Backend (/backend)
+```
 backend/
 ├── src/
 │   ├── controllers/
 │   │   ├── auth.controller.js
 │   │   └── message.controller.js
-│   │
 │   ├── emails/
 │   │   ├── emailHandler.js
 │   │   └── emailTemplates.js
-│   │
 │   ├── lib/
 │   │   ├── arcjet.js
 │   │   ├── cloudinary.js
@@ -76,25 +88,26 @@ backend/
 │   │   ├── resend.js
 │   │   ├── socket.js
 │   │   └── utils.js
-│   │
 │   ├── middlewares/
 │   │   ├── arcjet.middleware.js
 │   │   ├── auth.middleware.js
 │   │   └── socketAuth.middleware.js
-│   │
 │   ├── models/
 │   │   ├── user.model.js
 │   │   └── messages.model.js
-│   │
-│   ├── routes/
-│   │   ├── auth.routes.js
-│   │   ├── message.routes.js
-│   │   └── index.js
-│
+│   └── routes/
+│       ├── auth.routes.js
+│       ├── message.routes.js
+│       └── index.js
 ├── package.json
 └── package-lock.json
+```
 
-Frontend (/frontend)
+---
+
+### 🎨 Frontend
+
+```
 frontend/
 ├── public/
 │   ├── sounds/
@@ -104,63 +117,29 @@ frontend/
 │   │   ├── keystroke4.mp3
 │   │   ├── mouse-click.mp3
 │   │   └── notification.mp3
-│   │
 │   ├── avatar.png
 │   ├── login.png
 │   └── signup.png
-│
 ├── src/
 │   ├── components/
-│   │   ├── ChatContainer.jsx
-│   │   ├── ChatHeader.jsx
-│   │   ├── ChatsList.jsx
-│   │   ├── ContactList.jsx
-│   │   ├── MessageInput.jsx
-│   │   ├── ProfileHeader.jsx
-│   │   └── (UI & skeleton components)
-│   │
 │   ├── hooks/
-│   │   └── useKeyBoardSound.js
-│   │
 │   ├── lib/
-│   │   └── axios.js
-│   │
 │   ├── pages/
-│   │   ├── ChatPage.jsx
-│   │   ├── LoginPage.jsx
-│   │   └── SignupPage.jsx
-│   │
 │   ├── store/
-│   │   ├── useAuthStore.js
-│   │   └── useChatStore.js
-│   │
 │   ├── App.jsx
 │   ├── main.jsx
 │   └── index.css
-│
-├── tailwind.config.js
-├── vite.config.js
 ├── package.json
-└── package-lock.json
+└── vite.config.js
+```
 
-🧩 State Management
+---
 
-Chatzy uses Zustand instead of React Context for:
+## ⚙️ Environment Variables
 
-Authentication state
+Create a `.env` file inside the **backend** directory:
 
-User session handling
-
-Chat & message state
-
-Socket-related updates
-
-This keeps the app lightweight, scalable, and easy to maintain.
-
-⚙️ Environment Variables
-
-Create a .env file inside the backend directory:
-
+```
 PORT=5000
 MONGO_URI=your_mongodb_uri
 JWT_SECRET=your_jwt_secret
@@ -170,41 +149,56 @@ CLOUDINARY_API_KEY=xxxx
 CLOUDINARY_API_SECRET=xxxx
 
 RESEND_API_KEY=xxxx
+```
 
-▶️ Running Locally
-Backend
+---
+
+## ▶️ Running Locally
+
+### Backend
+
+```
 cd backend
 npm install
 npm start
+```
 
-Frontend
+### Frontend
+
+```
 cd frontend
 npm install
 npm run dev
+```
 
-🌍 Deployment
+---
 
-Frontend & Backend deployed using Sevalla
+## 🌍 Deployment
 
-Socket.IO configured for production environment
+* Frontend and Backend deployed using **Sevalla**
+* Environment variables managed via Sevalla dashboard
+* Socket.IO configured for production
 
-Environment variables managed via Sevalla dashboard
+---
 
-🔮 Future Enhancements
+## 🔮 Future Improvements
 
-Group chats
+* Group chats
+* Read receipts
+* Message reactions
+* File & image sharing
+* Dark / Light mode
+* Voice messages
 
-Message reactions
+---
 
-Read receipts
+## 👨‍💻 Author
 
-File & image sharing
+**Aakarshit Khajuria**
+GitHub: [https://github.com/Aakarshit5705](https://github.com/Aakarshit5705)
 
-Voice messages
+---
 
-Dark / Light theme toggle
+## 📄 License
 
-👨‍💻 Author
-
-Aakarshit Khajuria
-GitHub: Aakarshit5705
+This project is licensed under the **MIT License**.
