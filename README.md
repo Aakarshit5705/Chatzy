@@ -6,7 +6,7 @@ Chatzy is a modern **full-stack real-time chat application** built to deliver fa
 
 ## 🌐 Live Links
 
-* **Live Website:** [https://chatzy-frontend.onsevalla.com](https://chatzy-25sae.sevalla.app/)
+* **Live Website:** [Chatzyy](https://chatzy-25sae.sevalla.app/)
 
 
 > ℹ️ Users access the application via the frontend link.
